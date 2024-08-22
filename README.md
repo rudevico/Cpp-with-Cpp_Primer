@@ -36,5 +36,5 @@ define __cplusplus [DEFAULT_VERSION]
 compile할 때 특정 C++ 표준을 사용하도록 하는 방법:  
 ```zsh
 # g++ -std=[C++ 표준 버전] [C++파일명] -o [실행파일명]
-g++ -std=C++11 example.cpp -o example
+g++ -std=c++11 example.cpp -o example
 ```
