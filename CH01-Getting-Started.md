@@ -1,6 +1,6 @@
 **CONTENTS**  
-[Section 1.1 Writing a Simple C++ Program](#section-1-1-writing-a-simple-C--program)  
-[Section 1.2 A First Look at Input/Output](#section-1-2-a-first-look-at-input-output)
+[Section 1.1 Writing a Simple C++ Program](#section-11-writing-a-simple-cprogram)  
+[Section 1.2 A First Look at Input/Output](#section-12-a-first-look-at-inputoutput)
 
 
 # Section 1.1 Writing a Simple C++ Program
