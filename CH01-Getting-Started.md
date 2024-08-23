@@ -2,6 +2,7 @@
 * [Section 1.1 Writing a Simple C++ Program](#section-11-writing-a-simple-c-program)  
 * [Section 1.2 A First Look at Input/Output](#section-12-a-first-look-at-inputoutput)
 * [Section 1.3 A Word about Comments](#section-13-a-word-about-comments)
+* [Section 1.4 Flow of Control](#section-14-flow-of-control)
 
 # Section 1.1 Writing a Simple C++ Program
 ```zsh
@@ -145,6 +146,10 @@ int main()
 ```
 
 
-
-
-# Flow of Control
+# Section 1.4 Flow of Control
+sequential execution만으로 풀어낼 수 있는 problem은 사실상 없다고 봐도 무방하다.  
+-> 이를 해결하기 위해서 programming languages는 **flow-of-control statements**를 제공한다.  
+* **flow-of-control statements**
+  - **while** statement
+  - **for** statement
+  - **if** statement
