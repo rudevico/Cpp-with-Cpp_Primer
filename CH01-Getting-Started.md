@@ -1,7 +1,7 @@
 **Table of contents**  
 * [Section 1.1 Writing a Simple C++ Program](#section-11-writing-a-simple-c-program)  
 * [Section 1.2 A First Look at Input/Output](#section-12-a-first-look-at-inputoutput)
-
+* [Section 1.3 A Word about Comments](#section-13-a-word-about-comments)
 
 # Section 1.1 Writing a Simple C++ Program
 ```zsh
@@ -57,10 +57,93 @@ prog	prog.cc  prog1  prog1.cc
 
 
 # Section 1.2 A First Look at Input/Output
+```cpp
+// Section 1.3
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter two numbers:" << std::endl;
+    int v1 = 0; v2 = 0;
+    std::cin >> v1 >> v2;
+    std::cout << "The sum of " << v1 << " and " << v2
+              << " is " << (v1 + v2) << std::endl;
+
+    return 0;
+```
+
+```cpp
+// Exercise 1.4
+/*
+ * Our program used the addition operator, +, to add two numbers.
+ * Write a program that uses the multiplication operator, *,
+ * to print the product instead.
+ */
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter two numbers:" << std::endl;
+    int v1 = 0, v2 = 0;   // variables to hold the input we read
+    std::cin >> v1 >> v2; // read input
+    std::cout << "The product of " << v1
+              << " and " << v2
+              << " is " << (v1 * v2) << std::endl;
+
+    return 0;
+}
+```
 
 
+# Section 1.3 A Word about Comments
+Comment Pairs(blocks) Do Not Nest
+```cpp
+// Section 1.3
+/*
+ * commentpairs/* */cannotnest.
+ * ‘‘cannot nest’’ is considered source code,
+ * as is the rest of the program
+ */
+int main() {
+return 0; }
+```
 
-# A Word about Comments
+```
+comment-pairs-do-not-nest.cc:2:18: warning: '/*' within block comment [-Wcomment]
+ * comment pairs /* */ cannot nest.
+                 ^
+comment-pairs-do-not-nest.cc:2:24: error: unknown type name 'cannot'
+ * comment pairs /* */ cannot nest.
+                       ^
+comment-pairs-do-not-nest.cc:2:35: error: expected ';' after top level declarator
+ * comment pairs /* */ cannot nest.
+                                  ^
+                                  ;
+1 warning and 2 errors generated.
+```
+
+다음과 같은 상황에서 `main()` 전체를 comment하고 싶다면, /* */로 묶어서 Nested되게 하지 말고 `main()`의 각 line에 single-line comment(`//`)를 붙여주면 된다.  
+
+```cpp
+int main()
+{
+    /*
+     * This is a comment block
+     * comment block
+     */
+    printf(“hi”);
+```
+
+```cpp
+//int main()
+//{
+//    /*
+//     * This is a comment block
+//     * comment block
+//     */
+//    printf(“hi”);
+```
+
 
 
 
