@@ -67,6 +67,85 @@ std::cout << (u + i) << std::endl; // if 32-bit ints, prints 4294967264
 */
 ```
 
+```cpp
+unsigned int u1 = 42, u2 = 10;
+std::cout << u1 - u2 << std::endl; // ok: result is 32
+std::cout << u2 - u1 << std::endl; // ok: but the result will wrap around
+/* Regardless of whether one or both operands are unsigned,
+ * if we subtract a value from an unsigned, we must be sure
+ * that the result cannot be negative
+*/
+```
+
+The fact that an unsigned cannot be less than zero also affects how we write loops.  
+```cpp
+// 정상적으로 종료되는 loop
+for (int i = 10; i >= 10; --i)
+    std::cout << i << std::endl;
+
+// WRONG: u can never be less than 0; the condition will always succeed
+// 무한 loop에 빠지는 경우
+for (unsigned u = 10; u >= 0; --u)
+    std::cout << u << std::endl;
+```
+
+unsigned에 대해서 0까지만 출력하고 loop을 멈추게 하려면 `while` statement를 사용한다.  
+```cpp
+unsigned u = 11; // start the loop one past the first element we want to print
+while (u > 0) {
+    --u;         // decrement first, so that the last iteration will print 0
+    std::cout << u << std::endl;
+```
+
+```cpp
+// Exercise 2.3: What output will the following code produce?
+#include <iostream>
+
+int main() {
+    unsigned u = 10, u2 = 42;
+    std::cout << (u2 - u) << std::endl; // prints 32
+    std::cout << (u - u2) << std::endl; // assuming 32-bit, prints 4294967264
+
+    int i = 10, i2 = 42;
+    std::cout << (i2 - i) << std::endl; // prints 32
+    std::cout << (i - i2) << std::endl; // prints -32
+    std::cout << (i - u) << std::endl;  // prints 0
+    std::cout << (u - i) << std::endl;  // prints 0
+    /* unsigned는 grater than or equal to 0이기 때문에
+     * 두 경우 모두 wrap arround없이 0을 출력한다.
+    */
+
+    return 0;
+}
+```
+
+## 2. 1. 3. Literals
+A value, such as 42, is known as a literal because its value self-evident. Every literal has a type. The form and value of a literal determine its type.  
+
+### Integer and Floating-Point Literals
+integer literal의 경우 다음과 같이 구분할 수 있다.  
+* begin with nothing  
+  `20 // decimal 10진수`
+* begin with 0(zero)  
+  `024 // octal 8진수`
+* begin with 0x or 0X  
+  `0x14 // hexadecimal 16진수`
+* floating-point literals have type `double`
+
+**Literal is never a negative number.**  
+`-42`는 `42`라는 literal을 `-`라는 operator를 통해서 negation한 것이다. 즉 `-42`는 literal이 아니다.
+
+### Character and Chararcter String Literals
+* `'a' // character literal, size is 1`
+* `"A" // string literal, size is 2 because compiler appends a null character`
+
+### Escape Sequences
+### Specifying the Type of a Literal
+### Boolean and Pointer Literals
+* `bool test = false; // The words true and false are literals of type bool`
+* `int* ptr = nullptr // The word nullptr is a pointer literal`
+
+
 # Section 2.2 | Variables
 # Section 2.3 | Compound Types
 # Section 2.4 | `const` Qualifier
