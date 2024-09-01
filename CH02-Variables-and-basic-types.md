@@ -147,6 +147,99 @@ integer literal의 경우 다음과 같이 구분할 수 있다.
 
 
 # Section 2.2 | Variables
+A variable provides us with named storage that our programs can manipulate.  
+Each variable in C++ has a type.  
+C++ programmers tend to refer to variables as "variables" or "objects" interchangeably.
+
+## 2. 2. 1. Variable Definitions
+```cpp
+int sum = 0, value, // sum, value, and units_sold have type int
+    units_sold = 0; // sum and units_sold have initial value 0(value have garbage value)
+Sales_item item;    // item has type Sales_item
+// string is a library type, representing a variable-length sequence of characters
+std::string book("0-201-78345-X"); // book initialized from string literal
+```
+* `string` is defined in namespace `std`.
+* `book` is initialized to hold the characters 0-201-78345-X.
+```cpp
+#include <iostream>
+
+int main() {
+    std::string book("0-201-78345-X"); // book = "0-201..."로도 되는데 왜 이렇게 쓰는지 의도 모르겠음
+    std::cout << book << std::endl; // prints 0-201-78345-X
+
+    return 0;
+}
+```
+
+### Initializers
+An object that is **initialized** gets the specified value at the moment it is created.  
+Initialize(초기화)와 Assign(할당) 모두 `=` operator를 사용하기 때문에 헷갈릴 수 있지만 둘은 엄연히 다르다. 이 다르다는 개념은 C++에서 중요한데 더 자세하게는 나중에 다루도록 한다.  
+* Initialization happens when a variable is given a value when it is created.
+* Assignment obliterates an object's current value and replaces that value with a new one.
+
+### List Initialization
+We can use any of the following four different ways to define an `int` variable named `units_sold` and initialize it to 0:  
+```cpp
+int units_sold = 0;
+int units_sold = {0};
+int units_sold{0}; // C++11부터 권장되는 방법
+int units_sold(0);
+```
+
+기존에는 curly brace `{}`를 사용한 initialize는 list 등의 특정 type에 대해서만 사용 가능했다.  
+즉 `int` 등의 type에서는 `{}`를 사용한 initialize가 불가하고 `=`을 사용해서만 가능했었다.  
+
+C++11 이후부터는 any type에 대한 initialize를 모두 `{}`를 통해서 하는 것을 권장한다.
+* 이유1. Safety  
+narrowing conversion(더 좁은 범위로의 conversion) 즉 `double`에서 `int`로 하는 경우 등…을 시도하는 경우에 compile error를 발생시킨다. -> 안전함
+
+* 이유2. Consistency  
+C++11이전에는 variable 초기화 시에는 `=`을 사용하고, array 초기화 시에는 `{}`를 사용해서 헷갈리는 경우가 발생했는데, C++11부터는 초기화에는 무조건 `{}`를 사용함으로써 코드의 통일성을 증가시킬 수 있다.
+
+* 이유3. Clarity  
+(위에서 언급한 바와 같이) variable에 대해서는 초기화와 할당 모두 `=`을 사용하기 때문에 지금 내가 초기화를 하는 건지 할당을 하는 건지 헷갈리는 경우가 발생할 수 있다.  
+C++11부터는 초기화에는 무조건 `{}`를 씀으로써 `=`을 쓰는 경우에는 "할당이구나" 하고 명확하게 알 수 있다.
+
+```cpp
+long double ld = 3.1415926536;
+int a{ld}, b = {ld}; // error: narrowing conversion required
+int c(ld), d = ld;   // ok: but value will be truncated
+```
+
+### Default Initialization
+**built-in type**  
+When we define a variable without an initializer, the variable is **default initialized**.  
+The value of an object of built-in type that is not explicitly initialized depends on where it is defined.  
+* Variables defined outside any function body(=> global var) are initialized to zero.
+* Variables of built-in type defined inside a function(=> local var) are **uninitialized**.
+  - It is an error to copy or otherwise try to access the avlue of a variable whose value is undefined.
+
+**class**  
+Most classes let us define objects without explicit initializers. Because such classes supply an appropriate default value for us.  
+```cpp
+std::sting empty; // empty implicitly initialized to the empty string
+Sales_item item;  // default-initialized Sales_item object
+```
+
+## 2. 2. 2. Variable Declarations and Definitions
+* A variable declaration specifies the type and name of a variable.
+* A variable definition is a declaration. In addition to specifying the name and type, a definition also allocates storage and amy provide the variable with and initial value.
+
+To obtain a declaration that is not also a definition, we add the `extern` keyword and may not provide an explicit initialzier:  
+```cpp
+extern int i; // declares but does not define i
+int j; 
+```
+We can provide an initializer on a variable defined as `extern`, but doing so overrides the `extern`. An `extern` that has an initializer is a definition:  
+```cpp
+extern double pi = 3.1416; // definition
+```
+It is an error to provide an initializer on an `extern` inside a function.  
+> extern과 intializer를 같이 사용하는 경우에는 후자가 override하여 definition이 되고, 만약 함수 내부에서의 경우라면 error가 발생한다는 의미이다.
+
+## 2. 2. 3. Identifiers
+
 # Section 2.3 | Compound Types
 # Section 2.4 | `const` Qualifier
 # Section 2.5 | Dealing with Types
